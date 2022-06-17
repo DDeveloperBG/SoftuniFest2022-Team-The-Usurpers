@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Services.EncryptText
+namespace DWH.Services.EncryptText
 {
     public class EncryptionService : IEncryptionService
     {

@@ -2,6 +2,7 @@
 {
     using DWH.Data;
     using DWH.Data.Seeding;
+    using DWH.Services.GetNewRecords;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddTransient<INewRecordsService, NewRecordsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
@@ -50,11 +53,6 @@
             {
                 app.UseHsts();
             }
-
-            app.UseCors(options =>
-                 options.WithOrigins("http://localhost:3000")
-                 .AllowAnyHeader()
-                 .AllowAnyMethod());
 
             app.UseRouting();
 

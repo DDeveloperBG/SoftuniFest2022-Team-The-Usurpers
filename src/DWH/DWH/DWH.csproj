@@ -31,7 +31,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Common\DWH.Common\DWH.Common.csproj" />
 	  <ProjectReference Include="..\Data\DWH.Data\DWH.Data.csproj" />
+	  <ProjectReference Include="..\DWH.Services\DWH.Services.csproj" />
 	</ItemGroup>
 
 </Project>

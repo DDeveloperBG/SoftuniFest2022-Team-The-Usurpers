@@ -16,9 +16,11 @@
 
         public DateTime PaymentCardValidUntil { get; set; }
 
-        [ForeignKey(nameof(ApplicationUser))]
-        public string ApplicationUserId { get; set; }
+        public DateTime RegisteredOn { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
 }

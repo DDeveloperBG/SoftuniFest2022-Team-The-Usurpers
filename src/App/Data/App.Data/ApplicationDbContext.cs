@@ -8,6 +8,7 @@
 
     using App.Data.Common.Models;
     using App.Data.Models;
+
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,10 @@
         }
 
         public DbSet<CardHolder> CardHolders { get; set; }
+
+        public DbSet<BankEmployee> BankEmployees { get; set; }
+
+        public DbSet<Shopkeeper> Shopkeepers { get; set; }
 
         public DbSet<Discount> Discounts { get; set; }
 

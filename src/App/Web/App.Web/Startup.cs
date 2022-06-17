@@ -10,6 +10,7 @@
     using App.Data.Models;
     using App.Data.Repositories;
     using App.Data.Seeding;
+    using App.Services.Data.UpdateRecords;
     using App.Services.Mapping;
     using App.Services.Messaging;
     using App.Web.ViewModels;
@@ -90,6 +91,10 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IUpdateRecordsService>(_
+                => new UpdateRecordsService(
+                        this.configuration["DWH:Url"],
+                        this.configuration["DWH:AccessToken"]));
         }
 
         public void Configure(IApplicationBuilder app, IRecurringJobManager recurringJobManager)
