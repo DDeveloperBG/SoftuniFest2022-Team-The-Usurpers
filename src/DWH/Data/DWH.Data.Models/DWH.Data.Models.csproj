@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Common\DWH.Common\DWH.Common.csproj" />
 		<ProjectReference Include="..\DWH.Data.Common\DWH.Data.Common.csproj" />
 	</ItemGroup>
 

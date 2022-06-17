@@ -19,7 +19,7 @@ namespace App.Data.Models
         }
 
         // Audit info
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; } // Equal to RegisteredOn
 
         public DateTime? ModifiedOn { get; set; }
 

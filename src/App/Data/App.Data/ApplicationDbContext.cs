@@ -8,7 +8,6 @@
 
     using App.Data.Common.Models;
     using App.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -24,7 +23,11 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<CardHolder> CardHolders { get; set; }
+
+        public DbSet<Discount> Discounts { get; set; }
+
+        public DbSet<Terminal> Terminals { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
