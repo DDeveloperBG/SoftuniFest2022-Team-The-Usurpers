@@ -1,10 +1,11 @@
 ﻿namespace App.Services.Data.UpdateRecords
 {
-    using System;
-    using System.Linq;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using App.Data.Common.Repositories;
     using App.Data.Models;
+    using App.Services.Data.DTOs;
 
     public class BankEmployeesService : IBankEmployeesService
     {
@@ -15,22 +16,28 @@
             this.bankEmployees = bankEmployees;
         }
 
-        public bool CheckIfLastRegisteredWasBeforeOneHour()
+        public async Task AddNewRecordsAsync(IEnumerable<BankEmployeeNewRecordDTO> newRecords)
         {
-            var lastCreatedOneTime = this.bankEmployees
-                 .AllAsNoTracking()
-                 .OrderBy(x => x.CreatedOn)
-                 .Select(x => x.CreatedOn)
-                 .FirstOrDefault();
-
-            if (lastCreatedOneTime == default)
+            foreach (var record in newRecords)
             {
-                return true;
+                var user = new ApplicationUser
+                {
+                    UserName = record.Username,
+                    Email = record.Email,
+                    PasswordHash = record.Password,
+                };
+
+                var bankEmployee = new BankEmployee
+                {
+                    Id = record.Id,
+                    User = user,
+                    CreatedOn = record.CreatedOn,
+                };
+
+                await this.bankEmployees.AddAsync(bankEmployee);
             }
 
-            double minutesDiference = (DateTime.UtcNow - lastCreatedOneTime).TotalMinutes;
-
-            return minutesDiference > 50;
+            await this.bankEmployees.SaveChangesAsync();
         }
     }
 }

@@ -33,7 +33,7 @@
                          Username = x.Username,
                          CreatedOn = x.CreatedOn,
                      })
-                     .FirstOrDefault();
+                     .ToList();
             }
             else if (type == "Shopkeeper")
             {
@@ -52,7 +52,7 @@
                          PhoneNumber = x.PhoneNumber,
                          RegisteredOn = x.RegisteredOn,
                      })
-                     .FirstOrDefault();
+                     .ToList();
             }
             else if (type == "Terminal")
             {
@@ -65,8 +65,9 @@
                     {
                         TerminalId = x.Id,
                         ShopkeeperId = x.ShopkeeperId,
+                        CreatedOn = x.CreatedOn,
                     })
-                    .FirstOrDefault();
+                    .ToList();
             }
             else
             {

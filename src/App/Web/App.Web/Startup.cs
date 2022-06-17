@@ -10,10 +10,12 @@
     using App.Data.Models;
     using App.Data.Repositories;
     using App.Data.Seeding;
+    using App.Services.Data.BaseModel;
     using App.Services.Data.UpdateRecords;
     using App.Services.Mapping;
     using App.Services.Messaging;
     using App.Web.ViewModels;
+    using App.Web.ViewModels.DWH;
 
     using Hangfire;
     using Hangfire.Dashboard;
@@ -89,12 +91,20 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            // Singleton
+            services.AddSingleton<DWHKeys>(_ => new DWHKeys
+            {
+                Url = this.configuration["DWH:Url"],
+                AccessToken = this.configuration["DWH:AccessToken"],
+            });
+
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<IUpdateRecordsService>(_
-                => new UpdateRecordsService(
-                        this.configuration["DWH:Url"],
-                        this.configuration["DWH:AccessToken"]));
+            services.AddTransient<IBaseModelService, BaseModelService>();
+            services.AddTransient<IUpdateRecordsService, UpdateRecordsService>();
+            services.AddTransient<IBankEmployeesService, BankEmployeesService>();
+            services.AddTransient<IShopkeepersService, ShopkeepersService>();
+            services.AddTransient<ITerminalService, TerminalService>();
         }
 
         public void Configure(IApplicationBuilder app, IRecurringJobManager recurringJobManager)
@@ -146,23 +156,11 @@
 
         private void SeedHangfireJobs(IRecurringJobManager recurringJobManager)
         {
-            //recurringJobManager
-            //    .AddOrUpdate<IMontlyPaymentsService>(
-            //        "UpdateShopkeepers",
-            //        x => x.PayMontlySalariesAsync(),
-            //        Cron.Hourly);
-
-            //recurringJobManager
-            //    .AddOrUpdate<IMontlyPaymentsService>(
-            //        "UpdateBankEmployees",
-            //        x => x.PayMontlySalariesAsync(),
-            //        Cron.Hourly);
-
-            //recurringJobManager
-            //    .AddOrUpdate<IMontlyPaymentsService>(
-            //        "UpdateTerminals",
-            //        x => x.PayMontlySalariesAsync(),
-            //        Cron.Hourly);
+            recurringJobManager
+                .AddOrUpdate<IUpdateRecordsService>(
+                    "UpdateRecordsFromDWH",
+                    x => x.UpdateRecordsAsync(),
+                    Cron.Hourly);
         }
 
         private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter

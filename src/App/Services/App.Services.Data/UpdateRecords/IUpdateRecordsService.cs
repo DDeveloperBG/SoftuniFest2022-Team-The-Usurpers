@@ -1,11 +1,9 @@
 ﻿namespace App.Services.Data.UpdateRecords
 {
+    using System.Threading.Tasks;
+
     public interface IUpdateRecordsService
     {
-        void UpdateShopkeepers();
-
-        void UpdateBankEmployees();
-
-        void UpdateTerminals();
+        Task UpdateRecordsAsync();
     }
 }
