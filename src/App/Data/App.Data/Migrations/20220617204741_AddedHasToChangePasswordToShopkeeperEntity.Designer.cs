@@ -4,6 +4,7 @@ using App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220617204741_AddedHasToChangePasswordToShopkeeperEntity")]
+    partial class AddedHasToChangePasswordToShopkeeperEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +162,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BankEmployees", (string)null);
+                    b.ToTable("BankEmployees");
                 });
 
             modelBuilder.Entity("App.Data.Models.CardHolder", b =>
@@ -190,7 +192,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CardHolders", (string)null);
+                    b.ToTable("CardHolders");
                 });
 
             modelBuilder.Entity("App.Data.Models.Discount", b =>
@@ -223,7 +225,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("ShopkeeperId");
 
-                    b.ToTable("Discounts", (string)null);
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("App.Data.Models.Shopkeeper", b =>
@@ -250,7 +252,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Shopkeepers", (string)null);
+                    b.ToTable("Shopkeepers");
                 });
 
             modelBuilder.Entity("App.Data.Models.Terminal", b =>
@@ -271,7 +273,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("ShopkeeperId");
 
-                    b.ToTable("Terminals", (string)null);
+                    b.ToTable("Terminals");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

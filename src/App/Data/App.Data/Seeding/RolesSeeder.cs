@@ -17,6 +17,9 @@
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
             await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.CardHolderRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.BankEmployeeRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.ShopkeeperRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)

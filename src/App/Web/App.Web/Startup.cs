@@ -103,6 +103,7 @@
             services.AddTransient<IBaseModelService, BaseModelService>();
             services.AddTransient<IUpdateRecordsService, UpdateRecordsService>();
             services.AddTransient<IBankEmployeesService, BankEmployeesService>();
+            services.AddTransient<ICardHoldersService, CardHoldersService>();
             services.AddTransient<IShopkeepersService, ShopkeepersService>();
             services.AddTransient<ITerminalService, TerminalService>();
         }
@@ -112,11 +113,11 @@
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                this.SeedHangfireJobs(recurringJobManager);
-
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+
+                this.SeedHangfireJobs(recurringJobManager);
             }
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
@@ -132,10 +133,6 @@
                 app.UseHsts();
             }
 
-            app.UseHangfireDashboard(
-                "/hangfire",
-                new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -144,6 +141,10 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireDashboard(
+                "/hangfire",
+                new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
 
             app.UseEndpoints(
               endpoints =>
@@ -168,7 +169,7 @@
             public bool Authorize(DashboardContext context)
             {
                 var httpContext = context.GetHttpContext();
-                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+                return true;//httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
             }
         }
     }

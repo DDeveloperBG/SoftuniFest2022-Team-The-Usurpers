@@ -10,9 +10,12 @@
         public Shopkeeper()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.HasToChangePassword = true;
         }
 
         public DateTime RegisteredOn { get; set; }
+
+        public bool HasToChangePassword { get; set; }
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }

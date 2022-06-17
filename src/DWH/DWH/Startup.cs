@@ -1,9 +1,12 @@
 ﻿namespace DWH
 {
     using DWH.Data;
+    using DWH.Data.Common;
+    using DWH.Data.Common.Repositories;
+    using DWH.Data.Repositories;
     using DWH.Data.Seeding;
     using DWH.Services.GetNewRecords;
-
+    using DWH.Services.Hash;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -31,7 +34,14 @@
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
+            services.AddSingleton(this.configuration);
+
             services.AddTransient<INewRecordsService, NewRecordsService>();
+            services.AddTransient<IHashService, HashService>();
+
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)

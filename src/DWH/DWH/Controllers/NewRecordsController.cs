@@ -1,9 +1,11 @@
 ﻿namespace DWH.Controllers
 {
+    using System;
+    using System.Globalization;
+
     using DWH.Services.GetNewRecords;
 
     using Microsoft.AspNetCore.Mvc;
-    using System.Globalization;
 
     [ApiController]
     [Route("/api/[action]")]
