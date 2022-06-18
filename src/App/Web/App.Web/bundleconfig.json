@@ -20,5 +20,17 @@
     "inputFiles": [
       "wwwroot/css/theme.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/guest_homepage.min.css",
+    "inputFiles": [
+      "wwwroot/css/guest_homepage.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/auth.min.css",
+    "inputFiles": [
+      "wwwroot/css/auth.css"
+    ]
   }
 ]

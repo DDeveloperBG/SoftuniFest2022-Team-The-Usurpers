@@ -9,17 +9,17 @@
         <form method="post" class="col-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mt-4 mb-4">
-                <label asp-for="@Model.DiscountSize"></label>
+                <label asp-for="@Model.DiscountSize" class="form-label"></label>
                 <input id="startTimeInput" asp-for="@Model.DiscountSize" class="form-control" />
                 <span asp-validation-for="@Model.DiscountSize" class="text-danger"></span>
             </div>
             <div class="form-group mt-4 mb-4">
-                <label asp-for="@Model.StartDate"></label>
+                <label asp-for="@Model.StartDate" class="form-label"></label>
                 <input id="startTimeInput" asp-for="@Model.StartDate" class="form-control" />
                 <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group mt-4 mb-4">
-                <label asp-for="@Model.EndDate"></label>
+                <label asp-for="@Model.EndDate" class="form-label"></label>
                 <input id="startTimeInput" asp-for="@Model.EndDate" class="form-control" />
                 <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
             </div>

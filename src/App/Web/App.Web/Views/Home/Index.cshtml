@@ -3,6 +3,16 @@
     this.ViewData["Title"] = "Home Page";
 }
 
+@section Css
+{
+<link rel="stylesheet" href="~/css/guest_homepage.min.css" asp-append-version="true" />
+}
+
 <div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+    <h1 class="display-4">Welcome to <strong>@GlobalConstants.SystemName</strong></h1>
+    <div id="banner">
+        <a class="btn btn-primary" href="/Identity/Account/Register">
+            Register
+        </a>
+    </div>
 </div>

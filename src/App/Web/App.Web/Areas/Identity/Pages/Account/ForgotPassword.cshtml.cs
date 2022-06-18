@@ -47,7 +47,7 @@ namespace App.Web.Areas.Identity.Pages.Account
             if (this.ModelState.IsValid)
             {
                 var user = await this.userManager.FindByNameAsync(this.Input.Username);
-                if (user == null || !(await this.userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return this.RedirectToPage("./ForgotPasswordConfirmation");

@@ -1,0 +1,18 @@
+﻿#banner {
+    background: url(/images/backgound.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 640px;
+    position: relative;
+}
+
+    #banner a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        padding: 0.8rem 4rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 10px;
+    }
