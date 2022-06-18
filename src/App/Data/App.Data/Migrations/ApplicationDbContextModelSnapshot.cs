@@ -164,7 +164,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BankEmployees");
+                    b.ToTable("BankEmployees", (string)null);
                 });
 
             modelBuilder.Entity("App.Data.Models.CardHolder", b =>
@@ -195,7 +195,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CardHolders");
+                    b.ToTable("CardHolders", (string)null);
                 });
 
             modelBuilder.Entity("App.Data.Models.Discount", b =>
@@ -229,7 +229,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("ShopkeeperId");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discounts", (string)null);
                 });
 
             modelBuilder.Entity("App.Data.Models.DiscountVote", b =>
@@ -263,7 +263,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("DiscountId");
 
-                    b.ToTable("DiscountsVotes");
+                    b.ToTable("DiscountsVotes", (string)null);
                 });
 
             modelBuilder.Entity("App.Data.Models.Shopkeeper", b =>
@@ -291,7 +291,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Shopkeepers");
+                    b.ToTable("Shopkeepers", (string)null);
                 });
 
             modelBuilder.Entity("App.Data.Models.Terminal", b =>
@@ -312,7 +312,7 @@ namespace App.Data.Migrations
 
                     b.HasIndex("ShopkeeperId");
 
-                    b.ToTable("Terminals");
+                    b.ToTable("Terminals", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

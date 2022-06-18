@@ -20,20 +20,17 @@
         private readonly IRepository<ApplicationUser> users;
         private readonly IRepository<Discount> discounts;
         private readonly IEmailSender emailSender;
-        private readonly IWebHostEnvironment hostingEnvironment;
 
         public NotificationsService(
             UserManager<ApplicationUser> usermanager,
             IRepository<ApplicationUser> users,
             IEmailSender emailSender,
-            IRepository<Discount> discounts,
-            IWebHostEnvironment hostingEnvironment)
+            IRepository<Discount> discounts)
         {
             this.usermanager = usermanager;
             this.users = users;
             this.emailSender = emailSender;
             this.discounts = discounts;
-            this.hostingEnvironment = hostingEnvironment;
         }
 
         public Task ChangeNotificationsStateAsync(ClaimsPrincipal userClaims)

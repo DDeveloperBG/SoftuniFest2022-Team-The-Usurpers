@@ -9,7 +9,7 @@
     using System.Text.Encodings.Web;
     using System.Threading;
     using System.Threading.Tasks;
-
+    using App.Common;
     using App.Data.Models;
     using App.Services.Data.UpdateRecords;
     using App.Web.ViewModels.Register;
@@ -81,14 +81,27 @@
 
                 var user = this.CreateUser();
 
-                await this.userStore.SetUserNameAsync(user, this.Input.Email, CancellationToken.None);
+                user.PhoneNumber = this.Input.PhoneNumber;
+                await this.userStore.SetUserNameAsync(user, this.Input.Username, CancellationToken.None);
                 await this.emailStore.SetEmailAsync(user, this.Input.Email, CancellationToken.None);
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
+                if (result.Errors.Any())
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        this.ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    return this.Page();
+                }
+
+                await this.userManager.AddToRoleAsync(user, GlobalConstants.CardHolderRoleName);
 
                 await this.cardHoldersService.AddAsync(
                     this.Input.PaymentCardNumber,
                     this.Input.PaymentCardValidUntil,
-                    user);
+                    user.Id);
 
                 if (result.Succeeded)
                 {

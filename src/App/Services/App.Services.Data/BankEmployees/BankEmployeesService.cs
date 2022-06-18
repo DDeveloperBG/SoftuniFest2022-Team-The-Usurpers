@@ -105,12 +105,19 @@
                     .Where(x => x.Id == discountId)
                     .Single();
 
+                string userId = this.shopkeepers
+                    .AllAsNoTracking()
+                    .Where(x => x.Id == discount.ShopkeeperId)
+                    .Select(x => x.UserId)
+                    .Single();
+
                 discount.Status = votesSum >= 2 ? DiscountStatus.Active : DiscountStatus.Rejected;
                 await this.discounts.SaveChangesAsync();
 
                 string subject = "Your discount status got changed";
+
                 string contentHTML = $"Hello,\nYour discount with id {discountId} is now {discount.Status}";
-                this.notificationsService.SendNotification(bankEmployeeUserId, subject, contentHTML);
+                this.notificationsService.SendNotification(userId, subject, contentHTML);
             }
         }
 

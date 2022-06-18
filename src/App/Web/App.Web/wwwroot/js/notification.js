@@ -1,5 +1,8 @@
 ﻿window.addEventListener("load", () => {
     const notificationsInput = document.getElementById("notifications");
+    if (notificationsInput == undefined) {
+        return;
+    }
     const notificationsBellImg = document.getElementById("notify_bell");
     notificationsInput.addEventListener("change", notificationsStateChanged);
     setBellImg();

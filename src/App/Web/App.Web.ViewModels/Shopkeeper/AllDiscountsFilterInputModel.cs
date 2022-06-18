@@ -4,7 +4,7 @@
 
     public class AllDiscountsFilterInputModel
     {
-        public int Status { get; set; }
+        public int Status { get; set; } = -1;
 
         public DateTime StartDate { get; set; }
 

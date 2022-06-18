@@ -5,27 +5,21 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using App.Common;
     using App.Data.Common.Repositories;
     using App.Data.Models;
     using App.Services.Mapping;
     using App.Web.ViewModels.Register;
 
-    using Microsoft.AspNetCore.Identity;
-
     public class CardHoldersService : ICardHoldersService
     {
         private readonly IRepository<CardHolder> cardHolders;
         private readonly IRepository<Discount> discounts;
-        private readonly UserManager<ApplicationUser> userManager;
 
         public CardHoldersService(
             IRepository<CardHolder> cardHolders,
-            UserManager<ApplicationUser> userManager,
             IRepository<Discount> discounts)
         {
             this.cardHolders = cardHolders;
-            this.userManager = userManager;
             this.discounts = discounts;
         }
 
@@ -72,10 +66,8 @@
             return errors;
         }
 
-        public async Task AddAsync(ulong paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user)
+        public async Task AddAsync(ulong paymentCardNumber, string paymentCardValidUntilText, string userId)
         {
-            await this.userManager.AddToRoleAsync(user, GlobalConstants.CardHolderRoleName);
-
             int month = int.Parse(paymentCardValidUntilText[..2]);
             int year = int.Parse(paymentCardValidUntilText[3..]);
 
@@ -86,7 +78,7 @@
                 PaymentCardValidUntil = paymentCardValidUntil,
                 PaymentCardNumber = paymentCardNumber,
                 RegisteredOn = DateTime.UtcNow,
-                User = user,
+                UserId = userId,
             };
 
             await this.cardHolders.AddAsync(cardHolder);

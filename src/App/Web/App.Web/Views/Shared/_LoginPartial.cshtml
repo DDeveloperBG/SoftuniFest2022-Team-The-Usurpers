@@ -70,13 +70,16 @@
 <ul class="navbar-nav mt-2">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li class="nav-item mt-2 me-2">
-            <img id="notify_bell" src="~/images/notification_on.png" width="35px" class="me-1" />
-            <label class="switch">
-                <input id="notifications" type="checkbox" @(notificationsService.GetNotificationsState(this.User) ? "checked" : "")>
-                <span class="slider round"></span>
-            </label>
-        </li>
+        if (this.User.IsInRole(GlobalConstants.CardHolderRoleName) || this.User.IsInRole(GlobalConstants.ShopkeeperRoleName))
+        {
+            <li class="nav-item mt-2 me-2">
+                <img id="notify_bell" src="~/images/notification_on.png" width="35px" class="me-1" />
+                <label class="switch">
+                    <input id="notifications" type="checkbox" @(notificationsService.GetNotificationsState(this.User) ? "checked" : "")>
+                    <span class="slider round"></span>
+                </label>
+            </li>
+        }
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.User.Identity.Name!</a>
         </li>
