@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Razor.Templating.Core" Version="1.7.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -25,6 +26,7 @@
     <ProjectReference Include="..\..\Data\App.Data\App.Data.csproj" />
     <ProjectReference Include="..\..\Web\App.Web.ViewModels\App.Web.ViewModels.csproj" />
     <ProjectReference Include="..\App.Services.Mapping\App.Services.Mapping.csproj" />
+    <ProjectReference Include="..\App.Services.Messaging\App.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

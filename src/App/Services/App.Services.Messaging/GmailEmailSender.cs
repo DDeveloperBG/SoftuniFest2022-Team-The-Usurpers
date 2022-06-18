@@ -21,7 +21,7 @@
             mailMessage.From.Add(new MailboxAddress(GlobalConstants.SystemName, this.cofigKeys.Email));
             mailMessage.To.Add(new MailboxAddress("User", to));
             mailMessage.Subject = subject;
-            mailMessage.Body = new TextPart("plain")
+            mailMessage.Body = new TextPart("html")
             {
                 Text = htmlContent,
             };

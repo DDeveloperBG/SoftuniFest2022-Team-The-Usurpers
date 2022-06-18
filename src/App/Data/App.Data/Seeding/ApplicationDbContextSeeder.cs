@@ -25,6 +25,7 @@
 
             var seeders = new List<ISeeder>
                           {
+                              new AdminSeeder(),
                               new RolesSeeder(),
                           };
 

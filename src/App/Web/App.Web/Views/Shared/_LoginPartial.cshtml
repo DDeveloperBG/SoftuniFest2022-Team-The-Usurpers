@@ -1,10 +1,10 @@
 ﻿@using App.Common
 @using App.Data.Models
-@using App.Services.Data.Users
+@using App.Services.Data.Notifications
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@inject IApplicationUsersService applicationUsersService
+@inject INotificationsService notificationsService
 
 <style>
     .switch {
@@ -67,13 +67,13 @@
         }
 </style>
 
-<ul class="navbar-nav mt-3">
+<ul class="navbar-nav mt-2">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item mt-2 me-2">
             <img id="notify_bell" src="~/images/notification_on.png" width="35px" class="me-1" />
             <label class="switch">
-                <input id="notifications" type="checkbox" @(applicationUsersService.GetNotificationsState(this.User) ? "checked" : "")>
+                <input id="notifications" type="checkbox" @(notificationsService.GetNotificationsState(this.User) ? "checked" : "")>
                 <span class="slider round"></span>
             </label>
         </li>

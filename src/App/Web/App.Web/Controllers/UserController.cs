@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using App.Services.Data.Users;
+    using App.Services.Data.Notifications;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -10,18 +10,18 @@
     [Authorize]
     public class UserController : BaseController
     {
-        private readonly IApplicationUsersService applicationUsersService;
+        private readonly INotificationsService notificationsService;
 
-        public UserController(IApplicationUsersService applicationUsersService)
+        public UserController(INotificationsService notificationsService)
         {
-            this.applicationUsersService = applicationUsersService;
+            this.notificationsService = notificationsService;
         }
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> ChangeNotificationsStateAsync()
         {
-            await this.applicationUsersService.ChangeNotificationsStateAsync(this.User);
+            await this.notificationsService.ChangeNotificationsStateAsync(this.User);
 
             return this.Ok();
         }

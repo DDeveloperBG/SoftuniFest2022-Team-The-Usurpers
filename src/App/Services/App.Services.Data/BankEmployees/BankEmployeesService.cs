@@ -9,6 +9,7 @@
     using App.Data.Common.Repositories;
     using App.Data.Models;
     using App.Services.Data.DTOs;
+    using App.Services.Data.Notifications;
     using App.Services.Mapping;
     using App.Web.ViewModels.BankEmployee;
 
@@ -21,6 +22,7 @@
         private readonly IRepository<BankEmployee> bankEmployees;
         private readonly IRepository<Shopkeeper> shopkeepers;
         private readonly IRepository<Terminal> terminals;
+        private readonly INotificationsService notificationsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public BankEmployeesService(
@@ -29,6 +31,7 @@
             IRepository<Shopkeeper> shopkeepers,
             IRepository<DiscountVote> discountsVotes,
             IRepository<Terminal> terminals,
+            INotificationsService notificationsService,
             UserManager<ApplicationUser> userManager)
         {
             this.discounts = discounts;
@@ -37,6 +40,7 @@
             this.discountsVotes = discountsVotes;
             this.userManager = userManager;
             this.terminals = terminals;
+            this.notificationsService = notificationsService;
         }
 
         public async Task AddNewRecordsAsync(IEnumerable<BankEmployeeNewRecordDTO> newRecords)
@@ -103,6 +107,10 @@
 
                 discount.Status = votesSum >= 2 ? DiscountStatus.Active : DiscountStatus.Rejected;
                 await this.discounts.SaveChangesAsync();
+
+                string subject = "Your discount status got changed";
+                string contentHTML = $"Hello,\nYour discount with id {discountId} is now {discount.Status}";
+                this.notificationsService.SendNotification(bankEmployeeUserId, subject, contentHTML);
             }
         }
 

@@ -11,8 +11,8 @@
     using App.Data.Repositories;
     using App.Data.Seeding;
     using App.Services.Data.BaseModel;
+    using App.Services.Data.Notifications;
     using App.Services.Data.UpdateRecords;
-    using App.Services.Data.Users;
     using App.Services.Mapping;
     using App.Services.Messaging;
     using App.Web.Infrastructure.Middlewares;
@@ -108,7 +108,7 @@
             });
 
             // Application services
-            services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
+            services.AddTransient<INotificationsService, NotificationsService>();
             services.AddTransient<IEmailSender, GmailEmailSender>();
             services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, IdentityEmailSender>();
             services.AddTransient<IBaseModelService, BaseModelService>();
@@ -117,6 +117,8 @@
             services.AddTransient<ICardHoldersService, CardHoldersService>();
             services.AddTransient<IShopkeepersService, ShopkeepersService>();
             services.AddTransient<ITerminalService, TerminalService>();
+
+            services.AddRazorTemplating();
         }
 
         public void Configure(IApplicationBuilder app, IRecurringJobManager recurringJobManager)
@@ -176,6 +178,12 @@
                     "UpdateRecordsFromDWH",
                     x => x.UpdateRecordsAsync(),
                     Cron.Hourly);
+
+            recurringJobManager
+                .AddOrUpdate<INotificationsService>(
+                    "NotifyCardHoldersAboutNewAcceptedDiscounts",
+                    x => x.NotifyCardHoldersAboutNewAcceptedDiscountsAsync(),
+                    "30 7 * * 3");
         }
 
         private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
