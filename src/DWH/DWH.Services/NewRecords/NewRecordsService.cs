@@ -18,6 +18,7 @@
         public string GetNewRecordsAsJSON(string type, DateTime lastCreationTime)
         {
             object newRecords = null;
+            lastCreationTime = lastCreationTime.AddSeconds(1);
             if (type == "BankEmployee")
             {
                 var entity = GetEfRepositoryOfType<BankEmployee>();
@@ -31,7 +32,6 @@
                          Email = x.Email,
                          Password = x.Password,
                          Username = x.Username,
-                         CreatedOn = x.CreatedOn,
                      })
                      .ToList();
             }
@@ -48,7 +48,6 @@
                          Email = x.Email,
                          Password = x.Password,
                          Username = x.Username,
-                         CreatedOn = x.CreatedOn,
                          PhoneNumber = x.PhoneNumber,
                          RegisteredOn = x.RegisteredOn,
                      })
@@ -65,7 +64,6 @@
                     {
                         TerminalId = x.Id,
                         ShopkeeperId = x.ShopkeeperId,
-                        CreatedOn = x.CreatedOn,
                     })
                     .ToList();
             }

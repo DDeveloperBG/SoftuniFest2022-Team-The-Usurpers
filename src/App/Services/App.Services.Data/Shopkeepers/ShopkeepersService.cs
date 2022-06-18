@@ -43,7 +43,6 @@
                     Id = record.Id,
                     User = user,
                     RegisteredOn = record.RegisteredOn,
-                    CreatedOn = record.CreatedOn,
                 };
 
                 await this.shopkeepers.AddAsync(shopkeeper);
@@ -53,8 +52,20 @@
 
             foreach (var user in users)
             {
-                await this.userManager.AddToRoleAsync(user, GlobalConstants.BankEmployeeRoleName);
+                await this.userManager.AddToRoleAsync(user, GlobalConstants.ShopkeeperRoleName);
             }
+        }
+
+        public Task ChangeHasToChangePasswordStateAsync(string userId)
+        {
+            var shopkeeper = this.shopkeepers
+                .All()
+                .Where(x => x.UserId == userId)
+                .Single();
+
+            shopkeeper.HasToChangePassword = false;
+
+            return this.shopkeepers.SaveChangesAsync();
         }
 
         public bool HasToChangePassword(ApplicationUser user)

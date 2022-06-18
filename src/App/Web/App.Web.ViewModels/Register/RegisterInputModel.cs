@@ -28,7 +28,7 @@
         public string Email { get; set; }
 
         [DataType(DataType.CreditCard)]
-        public int PaymentCardNumber { get; set; }
+        public ulong PaymentCardNumber { get; set; }
 
         [DataType(DataType.Text)]
         public string PaymentCardValidUntil { get; set; }

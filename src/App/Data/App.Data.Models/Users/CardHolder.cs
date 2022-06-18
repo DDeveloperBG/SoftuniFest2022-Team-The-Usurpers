@@ -12,7 +12,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public int PaymentCardNumber { get; set; }
+        public ulong PaymentCardNumber { get; set; }
 
         public DateTime PaymentCardValidUntil { get; set; }
 

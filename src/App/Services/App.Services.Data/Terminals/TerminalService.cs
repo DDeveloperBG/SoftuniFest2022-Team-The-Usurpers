@@ -24,7 +24,6 @@
                 {
                     Id = record.TerminalId,
                     ShopkeeperId = record.ShopkeeperId,
-                    CreatedOn = record.CreatedOn,
                 };
 
                 await this.terminals.AddAsync(terminal);

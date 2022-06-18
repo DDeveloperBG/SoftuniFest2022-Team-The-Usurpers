@@ -1,27 +1,27 @@
 ﻿namespace DWH.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using DWH.Data.Common.Repositories;
     using DWH.Data.Models;
-    using DWH.DTOs;
+    using DWH.Services.DTOs;
     using DWH.Services.Hash;
+
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("/api/[controller]/[action]")]
-    public class ShopkeeperController : ControllerBase
+    public class BankEmployeeController : ControllerBase
     {
         private const string AccessToken = "204569a39efaa36c1";
-        private readonly IRepository<Shopkeeper> shopkeepers;
+        private readonly IRepository<BankEmployee> bankEmployees;
         private readonly IHashService hashService;
 
-        public ShopkeeperController(
-            IRepository<Shopkeeper> shopkeepers,
+        public BankEmployeeController(
+            IRepository<BankEmployee> bankEmployees,
             IHashService hashService)
         {
-            this.shopkeepers = shopkeepers;
+            this.bankEmployees = bankEmployees;
             this.hashService = hashService;
         }
 
@@ -30,7 +30,7 @@
             [FromQuery]
             string accessToken,
             [FromBody]
-            ShopkeeperInputModel input)
+            BankEmployeeInputModel input)
         {
             if (accessToken != AccessToken)
             {
@@ -38,17 +38,15 @@
             }
 
             var hashedPassword = this.hashService.HashText(input.Password);
-            var shopkeeper = new Shopkeeper
+            var bankEmployee = new BankEmployee
             {
                 Username = input.Username,
                 Email = input.Email,
                 Password = hashedPassword,
-                PhoneNumber = input.PhoneNumber,
-                RegisteredOn = DateTime.UtcNow,
             };
 
-            await this.shopkeepers.AddAsync(shopkeeper);
-            await this.shopkeepers.SaveChangesAsync();
+            await this.bankEmployees.AddAsync(bankEmployee);
+            await this.bankEmployees.SaveChangesAsync();
 
             return this.Ok();
         }

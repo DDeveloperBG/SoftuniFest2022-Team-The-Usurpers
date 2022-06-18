@@ -68,7 +68,7 @@
             return errors;
         }
 
-        public async Task AddAsync(int paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user)
+        public async Task AddAsync(ulong paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user)
         {
             await this.userManager.AddToRoleAsync(user, GlobalConstants.CardHolderRoleName);
 

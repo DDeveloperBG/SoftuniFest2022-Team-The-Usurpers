@@ -29,10 +29,10 @@
                 {
                     var user = await userManager.GetUserAsync(context.User);
 
-                    if (shopkeepersService.HasToChangePassword(user))
+                    var changePassLink = "/Identity/Account/Manage/ChangePassword/";
+                    if (shopkeepersService.HasToChangePassword(user) && context.Request.Path != changePassLink)
                     {
-                        var accountLink = "/Account/Manage/ChangePassword";
-                        context.Response.Redirect(accountLink);
+                        context.Response.Redirect(changePassLink);
                         return;
                     }
                 }

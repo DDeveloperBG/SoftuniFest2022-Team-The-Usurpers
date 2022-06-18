@@ -10,6 +10,6 @@
     {
         public List<string> ValidateRegisterInput(RegisterInputModel input);
 
-        public Task AddAsync(int paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user);
+        public Task AddAsync(ulong paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user);
     }
 }

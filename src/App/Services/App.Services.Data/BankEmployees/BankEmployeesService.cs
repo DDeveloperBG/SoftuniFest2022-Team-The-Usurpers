@@ -40,7 +40,6 @@
                 {
                     Id = record.Id,
                     User = user,
-                    CreatedOn = record.CreatedOn,
                 };
 
                 await this.bankEmployees.AddAsync(bankEmployee);

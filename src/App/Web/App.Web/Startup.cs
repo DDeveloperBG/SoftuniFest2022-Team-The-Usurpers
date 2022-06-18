@@ -14,9 +14,10 @@
     using App.Services.Data.UpdateRecords;
     using App.Services.Mapping;
     using App.Services.Messaging;
+    using App.Web.Infrastructure.Middlewares;
     using App.Web.ViewModels;
     using App.Web.ViewModels.DWH;
-
+    using App.Web.ViewModels.EmailSender;
     using Hangfire;
     using Hangfire.Dashboard;
     using Hangfire.SqlServer;
@@ -98,8 +99,15 @@
                 AccessToken = this.configuration["DWH:AccessToken"],
             });
 
+            services.AddSingleton<GmailSenderCofigKeys>(_ => new GmailSenderCofigKeys
+            {
+                Email = this.configuration["GmailSender:Email"],
+                Password = this.configuration["GmailSender:Password"],
+            });
+
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender, GmailEmailSender>();
+            services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, IdentityEmailSender>();
             services.AddTransient<IBaseModelService, BaseModelService>();
             services.AddTransient<IUpdateRecordsService, UpdateRecordsService>();
             services.AddTransient<IBankEmployeesService, BankEmployeesService>();
@@ -142,6 +150,9 @@
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Custom Middlewares: Start
+            app.UseCheckShopkeeperPasswordMiddleware();
+
             app.UseHangfireDashboard(
                 "/hangfire",
                 new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
@@ -169,7 +180,7 @@
             public bool Authorize(DashboardContext context)
             {
                 var httpContext = context.GetHttpContext();
-                return true;//httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
             }
         }
     }

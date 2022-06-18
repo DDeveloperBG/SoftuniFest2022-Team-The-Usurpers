@@ -11,5 +11,7 @@
         Task AddNewRecordsAsync(IEnumerable<ShopkeeperNewRecordDTO> newRecords);
 
         bool HasToChangePassword(ApplicationUser user);
+
+        Task ChangeHasToChangePasswordStateAsync(string userId);
     }
 }

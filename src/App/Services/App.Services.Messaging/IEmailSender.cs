@@ -1,13 +1,10 @@
 ﻿namespace App.Services.Messaging
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public interface IEmailSender
     {
-        Task SendEmailAsync(
-            string from,
-            string fromName,
+        void SendEmail(
             string to,
             string subject,
             string htmlContent,
