@@ -12,6 +12,7 @@
     using App.Data.Seeding;
     using App.Services.Data.BaseModel;
     using App.Services.Data.UpdateRecords;
+    using App.Services.Data.Users;
     using App.Services.Mapping;
     using App.Services.Messaging;
     using App.Web.Infrastructure.Middlewares;
@@ -107,6 +108,7 @@
             });
 
             // Application services
+            services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
             services.AddTransient<IEmailSender, GmailEmailSender>();
             services.AddTransient<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, IdentityEmailSender>();
             services.AddTransient<IBaseModelService, BaseModelService>();

@@ -32,5 +32,11 @@
     "inputFiles": [
       "wwwroot/css/auth.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notification.min.js",
+    "inputFiles": [
+      "wwwroot/js/notification.js"
+    ]
   }
 ]

@@ -16,7 +16,11 @@ namespace App.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+
+            this.ReceiveNotifications = false;
         }
+
+        public bool ReceiveNotifications { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
