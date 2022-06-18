@@ -8,7 +8,9 @@
     using App.Data.Common.Repositories;
     using App.Data.Models;
     using App.Services.Data.DTOs;
+    using App.Services.Mapping;
     using App.Web.ViewModels.Shopkeeper;
+
     using Microsoft.AspNetCore.Identity;
 
     public class ShopkeepersService : IShopkeepersService
@@ -98,6 +100,14 @@
 
             await this.discounts.AddAsync(discount);
             await this.discounts.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllDiscoundsMapped<T>()
+        {
+            return this.discounts
+                .AllAsNoTracking()
+                .To<T>()
+                .ToList();
         }
     }
 }

@@ -52,5 +52,13 @@
 
             return this.RedirectToAction(nameof(this.Dashboard));
         }
+
+        [HttpGet]
+        public IActionResult AllDiscounts()
+        {
+            var discounts = this.shopkeepersService.GetAllDiscoundsMapped<DiscountViewModel>();
+
+            return this.View(discounts);
+        }
     }
 }

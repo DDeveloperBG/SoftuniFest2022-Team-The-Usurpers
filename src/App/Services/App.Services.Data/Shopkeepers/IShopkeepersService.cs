@@ -16,5 +16,7 @@
         Task ChangeHasToChangePasswordStateAsync(string userId);
 
         Task AddDiscountAsync(DiscountInputModel input, string userId);
+
+        IEnumerable<T> GetAllDiscoundsMapped<T>();
     }
 }
