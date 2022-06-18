@@ -23,6 +23,6 @@
         [ForeignKey(nameof(Shopkeeper))]
         public string ShopkeeperId { get; set; }
 
-        public ApplicationUser Shopkeeper { get; set; }
+        public Shopkeeper Shopkeeper { get; set; }
     }
 }

@@ -5,6 +5,7 @@
 
     using App.Data.Models;
     using App.Services.Data.DTOs;
+    using App.Web.ViewModels.Shopkeeper;
 
     public interface IShopkeepersService
     {
@@ -13,5 +14,7 @@
         bool HasToChangePassword(ApplicationUser user);
 
         Task ChangeHasToChangePasswordStateAsync(string userId);
+
+        Task AddDiscountAsync(DiscountInputModel input, string userId);
     }
 }

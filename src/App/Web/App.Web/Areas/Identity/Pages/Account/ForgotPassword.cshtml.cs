@@ -3,7 +3,7 @@
 namespace App.Web.Areas.Identity.Pages.Account
 {
 #nullable disable
-    
+
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Text;

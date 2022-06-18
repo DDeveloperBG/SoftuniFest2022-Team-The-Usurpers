@@ -8,19 +8,22 @@
     using App.Data.Common.Repositories;
     using App.Data.Models;
     using App.Services.Data.DTOs;
-
+    using App.Web.ViewModels.Shopkeeper;
     using Microsoft.AspNetCore.Identity;
 
     public class ShopkeepersService : IShopkeepersService
     {
         private readonly IRepository<Shopkeeper> shopkeepers;
+        private readonly IRepository<Discount> discounts;
         private readonly UserManager<ApplicationUser> userManager;
 
         public ShopkeepersService(
             IRepository<Shopkeeper> shopkeepers,
+            IRepository<Discount> discounts,
             UserManager<ApplicationUser> userManager)
         {
             this.shopkeepers = shopkeepers;
+            this.discounts = discounts;
             this.userManager = userManager;
         }
 
@@ -75,6 +78,26 @@
                 .Where(x => x.UserId == user.Id)
                 .Select(x => x.HasToChangePassword)
                 .Single();
+        }
+
+        public async Task AddDiscountAsync(DiscountInputModel input, string userId)
+        {
+            var shopkeeperId = this.shopkeepers
+                .AllAsNoTracking()
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Id)
+                .Single();
+
+            Discount discount = new Discount
+            {
+                DiscountSize = input.DiscountSize,
+                StartDate = input.StartDate,
+                EndDate = input.EndDate,
+                ShopkeeperId = shopkeeperId,
+            };
+
+            await this.discounts.AddAsync(discount);
+            await this.discounts.SaveChangesAsync();
         }
     }
 }
