@@ -1,0 +1,55 @@
+﻿@using App.Data.Models
+@using App.Web.ViewModels.BankEmployee
+@model IEnumerable<DiscountViewModel>
+@{
+    this.ViewData["Title"] = "All Discounts";
+}
+
+<div class="m-4 light-background">
+    <div class="p-4">
+        <h1>@this.ViewData["Title"]</h1>
+        <table class="table table-bordered text-center mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">%</th>
+                    <th scope="col">Valid from</th>
+                    <th scope="col">Valid until</th>
+                    <th scope="col">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var discount in this.Model)
+                {
+                    <tr>
+                        <td>@discount.Id</td>
+                        <td>@discount.DiscountSize</td>
+                        <td>@discount.StartDate</td>
+                        <td>@discount.EndDate</td>
+                        @if (discount.HasVoted)
+                        {
+                            <td>@discount.Status</td>
+                        }
+                        else
+                        {
+                            <td>
+                                <a class="btn btn-success"
+                           asp-action="ChangeDiscountStatus"
+                           asp-route-discountId="@discount.Id"
+                           asp-route-vote="1">
+                                    Approve
+                                </a>
+                                <a class="btn btn-danger"
+                           asp-action="ChangeDiscountStatus"
+                           asp-route-discountId="@discount.Id"
+                           asp-route-vote="-1">
+                                    Reject
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

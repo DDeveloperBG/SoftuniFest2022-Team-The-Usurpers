@@ -2,9 +2,9 @@
 {
     public enum DiscountStatus
     {
-        Waiting,
-        Rejected,
-        Active,
-        Expired,
+        Waiting = 0,
+        Rejected = 1,
+        Active = 2,
+        Expired = 3,
     }
 }

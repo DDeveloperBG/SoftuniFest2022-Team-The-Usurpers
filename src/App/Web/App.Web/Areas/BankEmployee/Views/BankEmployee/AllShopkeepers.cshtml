@@ -1,0 +1,35 @@
+﻿@using App.Data.Models
+@using App.Web.ViewModels.BankEmployee
+@model IEnumerable<ShopkeeperViewModel>
+@{
+    this.ViewData["Title"] = "All Shopkeepers";
+}
+
+<div class="m-4 light-background">
+    <div class="p-4">
+        <h1>@this.ViewData["Title"]</h1>
+        <table class="table table-bordered text-center mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Registration Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shopkeeper in this.Model)
+                {
+                    <tr>
+                        <td>@shopkeeper.Id</td>
+                        <td>@shopkeeper.Username</td>
+                        <td>@shopkeeper.Email</td>
+                        <td>@shopkeeper.PhoneNumber</td>
+                        <td>@shopkeeper.RegisteredOn</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

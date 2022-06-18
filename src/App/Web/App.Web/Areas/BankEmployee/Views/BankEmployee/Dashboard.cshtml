@@ -1,11 +1,13 @@
 ﻿@{
-    this.ViewData["Title"] = "Admin dashboard";
+    this.ViewData["Title"] = "Bank Employee dashboard";
 }
 
 <div class="text-center">
     <h1 class="p-md-4">@this.ViewData["Title"]</h1>
 
     <ul class="list-group">
-        <li class="mb-3 list-group-item"><a class="text-decoration-none btn btn-primary" asp-action="AddDiscount">Add Discount</a></li>
+        <li class="list-group-item"><a class="text-decoration-none btn btn-primary" asp-action="AllDiscounts">All Discounts</a></li>
+        <li class="list-group-item"><a class="text-decoration-none btn btn-primary" asp-action="AllShopkeepers">All Shop Keepers</a></li>
+        <li class="list-group-item"><a class="text-decoration-none btn btn-primary" asp-action="AllTerminals">All Terminals</a></li>
     </ul>
 </div>

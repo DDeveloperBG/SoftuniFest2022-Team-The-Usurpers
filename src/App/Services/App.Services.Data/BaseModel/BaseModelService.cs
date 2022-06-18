@@ -22,7 +22,7 @@
             var entity = new EfRepository<T>(this.applicationDbContext);
             return entity
                  .AllAsNoTracking()
-                 .OrderBy(x => x.CreatedOn)
+                 .OrderByDescending(x => x.CreatedOn)
                  .Select(x => x.CreatedOn)
                  .FirstOrDefault();
         }

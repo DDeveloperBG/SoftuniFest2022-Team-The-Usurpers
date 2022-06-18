@@ -1,0 +1,29 @@
+﻿@using App.Data.Models
+@using App.Web.ViewModels.BankEmployee
+@model IEnumerable<TerminalViewModel>
+@{
+    this.ViewData["Title"] = "All Terminals";
+}
+
+<div class="m-4 light-background">
+    <div class="p-4">
+        <h1>@this.ViewData["Title"]</h1>
+        <table class="table table-bordered text-center mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Terminal Id</th>
+                    <th scope="col">Shopkeeper Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var terminal in this.Model)
+                {
+                    <tr>
+                        <td>@terminal.TerminalId</td>
+                        <td>@terminal.ShopkeeperId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

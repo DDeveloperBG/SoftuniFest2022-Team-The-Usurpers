@@ -4,6 +4,7 @@ using App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220618101232_AddedDiscountVoteEntity")]
+    partial class AddedDiscountVoteEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,7 @@ namespace App.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("BankEmployeeUserId")
+                    b.Property<string>("BankEmployeeId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -251,12 +253,12 @@ namespace App.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<short>("Vote")
-                        .HasColumnType("smallint");
+                    b.Property<byte>("Vote")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BankEmployeeUserId");
+                    b.HasIndex("BankEmployeeId");
 
                     b.HasIndex("DiscountId");
 
@@ -453,9 +455,9 @@ namespace App.Data.Migrations
 
             modelBuilder.Entity("App.Data.Models.DiscountVote", b =>
                 {
-                    b.HasOne("App.Data.Models.ApplicationUser", "BankEmployeeUser")
+                    b.HasOne("App.Data.Models.BankEmployee", "BankEmployee")
                         .WithMany()
-                        .HasForeignKey("BankEmployeeUserId")
+                        .HasForeignKey("BankEmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -465,7 +467,7 @@ namespace App.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("BankEmployeeUser");
+                    b.Navigation("BankEmployee");
 
                     b.Navigation("Discount");
                 });

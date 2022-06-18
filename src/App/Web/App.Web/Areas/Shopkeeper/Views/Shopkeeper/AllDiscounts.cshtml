@@ -1,7 +1,7 @@
 ﻿@using App.Data.Models
 @model IEnumerable<App.Web.ViewModels.Shopkeeper.DiscountViewModel>
 @{
-    this.ViewData["Title"] = "All Discount";
+    this.ViewData["Title"] = "All Discounts";
 }
 
 <div class="m-4 light-background">
@@ -25,7 +25,7 @@
                         <td>@discount.DiscountSize</td>
                         <td>@discount.StartDate</td>
                         <td>@discount.EndDate</td>
-                        <td>@((DiscountStatus)discount.Status)</td>
+                        <td>@discount.Status</td>
                     </tr>
                 }
             </tbody>

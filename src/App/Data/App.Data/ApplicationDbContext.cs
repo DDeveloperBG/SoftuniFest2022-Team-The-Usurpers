@@ -32,6 +32,8 @@
 
         public DbSet<Discount> Discounts { get; set; }
 
+        public DbSet<DiscountVote> DiscountsVotes { get; set; }
+
         public DbSet<Terminal> Terminals { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
