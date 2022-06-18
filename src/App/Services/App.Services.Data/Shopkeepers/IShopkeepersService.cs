@@ -17,6 +17,6 @@
 
         Task AddDiscountAsync(DiscountInputModel input, string userId);
 
-        IEnumerable<T> GetAllDiscoundsMapped<T>();
+        IEnumerable<T> GetAllDiscoundsMapped<T>(AllDiscountsFilterInputModel filter, string userId);
     }
 }

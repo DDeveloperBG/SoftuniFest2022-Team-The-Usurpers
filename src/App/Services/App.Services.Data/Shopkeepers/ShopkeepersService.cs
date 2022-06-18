@@ -1,5 +1,6 @@
 ﻿namespace App.Services.Data.UpdateRecords
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -102,10 +103,39 @@
             await this.discounts.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllDiscoundsMapped<T>()
+        public IEnumerable<T> GetAllDiscoundsMapped<T>(AllDiscountsFilterInputModel filter, string userId)
         {
-            return this.discounts
+            var query = this.discounts
                 .AllAsNoTracking()
+                .Where(x => x.Shopkeeper.UserId == userId);
+
+            if (filter.Status > -1)
+            {
+                var status = (DiscountStatus)filter.Status;
+                if (Enum.IsDefined<DiscountStatus>(status))
+                {
+                    if (status == DiscountStatus.Expired)
+                    {
+                        var utcNow = DateTime.UtcNow;
+                        query = query
+                            .Where(x => x.EndDate < utcNow);
+                    }
+                    else
+                    {
+                        query = query
+                            .Where(x => x.Status == status);
+                    }
+                }
+            }
+
+            if (filter.StartDate != default && filter.EndDate != default)
+            {
+                query = query
+                       .Where(x => x.StartDate >= filter.StartDate)
+                       .Where(x => x.EndDate <= filter.EndDate);
+            }
+
+            return query
                 .To<T>()
                 .ToList();
         }

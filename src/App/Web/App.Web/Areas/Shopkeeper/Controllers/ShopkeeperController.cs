@@ -1,5 +1,6 @@
 ﻿namespace App.Web.Areas.Shopkeeper.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using App.Common;
@@ -54,9 +55,10 @@
         }
 
         [HttpGet]
-        public IActionResult AllDiscounts()
+        public IActionResult AllDiscounts(AllDiscountsFilterInputModel filter)
         {
-            var discounts = this.shopkeepersService.GetAllDiscoundsMapped<DiscountViewModel>();
+            string userId = this.userManager.GetUserId(this.User);
+            var discounts = this.shopkeepersService.GetAllDiscoundsMapped<DiscountViewModel>(filter, userId);
 
             return this.View(discounts);
         }

@@ -7,6 +7,10 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+header {
+    font-size: 22px;
+}
+
 #page-body {
     min-height: 79vh;
     margin-bottom: 3rem;

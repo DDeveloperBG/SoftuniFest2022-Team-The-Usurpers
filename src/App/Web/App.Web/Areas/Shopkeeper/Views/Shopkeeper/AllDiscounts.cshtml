@@ -4,8 +4,41 @@
     this.ViewData["Title"] = "All Discounts";
 }
 
+<div class="ms-5">
+    <form>
+        <div class="row g-3">
+            <div class="form-group mt-4 col-3">
+                <label for="status">Discount Status</label>
+                <select name="status" class="form-select">
+                    <option value="-1" selected="true">Discount Status</option>
+                    @{
+                        int i = -1;
+                        foreach (string status in Enum.GetNames<DiscountStatus>())
+                        {
+                            i++;
+
+                            <option value="@i">@status</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group mt-4 col-3">
+                <label for="startDate">Valid from</label>
+                <input type="date" name="startDate" class="form-control" />
+            </div>
+            <div class="form-group mt-4 col-3">
+                <label for="endDate">Valid thru</label>
+                <input type="date" name="endDate" class="form-control" />
+            </div>
+            <div class="form-group mt-5 col-3">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="m-4 light-background">
-    <div class="p-4">
+    <div class="p-4 pt-0">
         <h1>@this.ViewData["Title"]</h1>
         <table class="table table-bordered text-center mt-4">
             <thead>
@@ -25,7 +58,17 @@
                         <td>@discount.DiscountSize</td>
                         <td>@discount.StartDate</td>
                         <td>@discount.EndDate</td>
-                        <td>@discount.Status</td>
+                        @{
+                            var utcNow = DateTime.UtcNow;
+                            if (discount.EndDate < utcNow)
+                            {
+                                <td>@DiscountStatus.Expired</td>
+                            }
+                            else
+                            {
+                                <td>@discount.Status</td>
+                            }
+                        }
                     </tr>
                 }
             </tbody>

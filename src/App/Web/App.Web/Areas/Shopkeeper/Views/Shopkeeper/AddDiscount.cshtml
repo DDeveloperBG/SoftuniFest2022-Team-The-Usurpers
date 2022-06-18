@@ -3,27 +3,27 @@
     this.ViewData["Title"] = "Add Discount";
 }
 
-<div class="m-5 light-background">
+<div class="m-4 light-background">
     <div class="p-4">
         <h1>@this.ViewData["Title"]</h1>
-        <form method="post" class="col-6">
+        <form method="post" class="col-5">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mt-4 mb-4">
                 <label asp-for="@Model.DiscountSize" class="form-label"></label>
-                <input id="startTimeInput" asp-for="@Model.DiscountSize" class="form-control" />
+                <input asp-for="@Model.DiscountSize" class="form-control" />
                 <span asp-validation-for="@Model.DiscountSize" class="text-danger"></span>
             </div>
             <div class="form-group mt-4 mb-4">
                 <label asp-for="@Model.StartDate" class="form-label"></label>
-                <input id="startTimeInput" asp-for="@Model.StartDate" class="form-control" />
+                <input asp-for="@Model.StartDate" class="form-control" />
                 <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group mt-4 mb-4">
                 <label asp-for="@Model.EndDate" class="form-label"></label>
-                <input id="startTimeInput" asp-for="@Model.EndDate" class="form-control" />
+                <input asp-for="@Model.EndDate" class="form-control" />
                 <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Изпрати</button>
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 </div>
