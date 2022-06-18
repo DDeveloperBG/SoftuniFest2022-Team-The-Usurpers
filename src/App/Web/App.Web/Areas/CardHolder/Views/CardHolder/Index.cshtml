@@ -1,3 +1,33 @@
-﻿@{
-    this.ViewData["Title"] = "Card Holder";
+﻿@using App.Data.Models
+@using App.Web.ViewModels.CardHolder
+@model IEnumerable<ActiveDicountViewModel>
+@{
+    this.ViewData["Title"] = "All Active Discounts";
 }
+
+<div class="m-4 light-background">
+    <div class="p-4">
+        <h1>@this.ViewData["Title"]</h1>
+        <table class="table table-bordered text-center mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Shopekeeper Username</th>
+                    <th scope="col">Discount %</th>
+                    <th scope="col">Valid from</th>
+                    <th scope="col">Valid thru</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var discount in this.Model)
+                {
+                    <tr>
+                        <td>@discount.ShopkeeperUsername</td>
+                        <td>@discount.DiscountSize</td>
+                        <td>@discount.StartDate</td>
+                        <td>@discount.EndDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

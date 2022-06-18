@@ -1,6 +1,8 @@
 ﻿namespace App.Web.Controllers
 {
     using App.Common;
+    using App.Services.Data.UpdateRecords;
+    using App.Web.ViewModels.CardHolder;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -9,9 +11,19 @@
     [Area("CardHolder")]
     public class CardHolderController : BaseController
     {
-        public IActionResult Dashboard()
+        private readonly ICardHoldersService cardHoldersService;
+
+        public CardHolderController(ICardHoldersService cardHoldersService)
         {
-            return this.View();
+            this.cardHoldersService = cardHoldersService;
+        }
+
+        public IActionResult Index()
+        {
+            var activeDiscounts = this.cardHoldersService
+                .GetAllActiveDiscounts<ActiveDicountViewModel>();
+
+            return this.View(activeDiscounts);
         }
     }
 }

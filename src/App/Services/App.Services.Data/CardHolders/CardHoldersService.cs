@@ -8,6 +8,7 @@
     using App.Common;
     using App.Data.Common.Repositories;
     using App.Data.Models;
+    using App.Services.Mapping;
     using App.Web.ViewModels.Register;
 
     using Microsoft.AspNetCore.Identity;
@@ -15,14 +16,17 @@
     public class CardHoldersService : ICardHoldersService
     {
         private readonly IRepository<CardHolder> cardHolders;
+        private readonly IRepository<Discount> discounts;
         private readonly UserManager<ApplicationUser> userManager;
 
         public CardHoldersService(
             IRepository<CardHolder> cardHolders,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IRepository<Discount> discounts)
         {
             this.cardHolders = cardHolders;
             this.userManager = userManager;
+            this.discounts = discounts;
         }
 
         public List<string> ValidateRegisterInput(RegisterInputModel input)
@@ -87,6 +91,18 @@
 
             await this.cardHolders.AddAsync(cardHolder);
             await this.cardHolders.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllActiveDiscounts<T>()
+        {
+            var nowUtc = DateTime.UtcNow;
+
+            return this.discounts
+                .AllAsNoTracking()
+                .Where(x => x.Status == DiscountStatus.Active)
+                .Where(x => x.StartDate <= nowUtc && nowUtc <= x.EndDate)
+                .To<T>()
+                .ToList();
         }
     }
 }

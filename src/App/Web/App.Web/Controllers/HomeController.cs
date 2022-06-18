@@ -21,7 +21,7 @@
             }
             else if (this.User.IsInRole(GlobalConstants.CardHolderRoleName))
             {
-                return this.LocalRedirect("/CardHolder/CardHolder/Dashboard");
+                return this.LocalRedirect("/CardHolder/CardHolder");
             }
 
             return this.View();

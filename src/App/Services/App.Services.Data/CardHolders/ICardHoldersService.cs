@@ -11,5 +11,7 @@
         public List<string> ValidateRegisterInput(RegisterInputModel input);
 
         public Task AddAsync(ulong paymentCardNumber, string paymentCardValidUntilText, ApplicationUser user);
+
+        IEnumerable<T> GetAllActiveDiscounts<T>();
     }
 }
