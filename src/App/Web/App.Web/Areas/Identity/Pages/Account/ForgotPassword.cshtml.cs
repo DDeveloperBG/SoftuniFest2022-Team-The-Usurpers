@@ -60,7 +60,7 @@ namespace App.Web.Areas.Identity.Pages.Account
                 await this.userManager.ResetPasswordAsync(user, resetToken, newPassword);
 
                 var loginUrl = this.Url.Page(
-                    "/Account/Login",
+                    "/Account/Manage/ChangePassword",
                     pageHandler: null,
                     values: new { area = "Identity" },
                     protocol: this.Request.Scheme);
