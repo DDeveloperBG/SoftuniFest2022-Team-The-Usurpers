@@ -23,6 +23,10 @@
             {
                 return this.LocalRedirect("/CardHolder/CardHolder");
             }
+            else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.LocalRedirect("/Administration/Dashboard");
+            }
 
             return this.View();
         }

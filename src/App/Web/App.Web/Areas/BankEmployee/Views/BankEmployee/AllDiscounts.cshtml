@@ -28,7 +28,15 @@
                         <td>@discount.EndDate</td>
                         @if (discount.HasVoted)
                         {
-                            <td>@discount.Status</td>
+                            var utcNow = DateTime.UtcNow;
+                            if (discount.EndDate < utcNow)
+                            {
+                                <td>@DiscountStatus.Expired</td>
+                            }
+                            else
+                            {
+                                <td>@discount.Status</td>
+                            }
                         }
                         else
                         {

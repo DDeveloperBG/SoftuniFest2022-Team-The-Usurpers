@@ -51,7 +51,7 @@
             string userId = this.userManager.GetUserId(this.User);
             await this.shopkeepersService.AddDiscountAsync(input, userId);
 
-            return this.RedirectToAction(nameof(this.Dashboard));
+            return this.RedirectToAction(nameof(this.AllDiscounts));
         }
 
         [HttpGet]
