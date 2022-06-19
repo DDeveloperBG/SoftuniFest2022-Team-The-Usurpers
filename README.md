@@ -17,10 +17,10 @@ This project was devoloped during Softuni Fest 2022.
 * MailKit
 
 ## Database Diagrams
-**[URL](https://github.com/DDeveloperBG/StudentsHelperRepoGallery/blob/master/PresentationResources/AppDatabaseDiagram.png)**
+**[URL](https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/AppDatabaseDiagram.png)**
 <img src="https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/AppDatabaseDiagram.png?raw=true">
 
-**[URL](https://github.com/DDeveloperBG/StudentsHelperRepoGallery/blob/master/PresentationResources/DWHDatabaseDiagram.png)**
+**[URL](https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/DWHDatabaseDiagram.png)**
 <img src="https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/DWHDatabaseDiagram.png?raw=true">
 
 ## Credits
