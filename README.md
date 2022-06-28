@@ -1,10 +1,11 @@
 <img src="https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/src/App/Web/App.Web/wwwroot/images/favicon.png?raw=true">
 
 # PostBank POS Terminal
-This project was devoloped during Softuni Fest 2022 by me.
+This project was devoloped by me during Softuni Fest 2022.
 
-# UPDATE !
-## I won!
+Task description on bulgarian: **[URL](https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/задание.html)**
+
+# UPDATE! I WON!
 <img src="https://github.com/DDeveloperBG/Programming-TheUsurpers/blob/master/PresentationResources/certificate.png?raw=true" height="700rem">
 
 ## Technologies Used
